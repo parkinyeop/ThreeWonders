@@ -5,7 +5,8 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
     public float moveSpeed = 1f;
-    
+    float xMin = -10f;
+
 
     private void Awake()
     {
@@ -15,6 +16,11 @@ public class BlockController : MonoBehaviour
     {
         transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
         
+        if (transform.position.x < xMin)
+        {
+            Destroy(gameObject);
+        }
+
     }
     private void OnCollisionEnter(Collision collision)
     {
