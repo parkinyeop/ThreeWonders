@@ -36,6 +36,7 @@ public class Score : MonoBehaviour
         {
             bestScore = Convert.ToInt32(currentScore);
             isNew = true;
+            Debug.Log($"Score: {isNew}");
         }
         else
         {

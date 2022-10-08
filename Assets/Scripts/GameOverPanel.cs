@@ -10,9 +10,10 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameOverPanel : MonoBehaviour
 {
     Button restartButton;
-    int bestScoe;
+    int bestScore;
     TextMeshProUGUI bestScoreText;
     CanvasGroup canvasGroup;
+    GameManager gameManager;
     Score score;
 
     private void Awake()
@@ -20,12 +21,15 @@ public class GameOverPanel : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         restartButton = transform.GetChild(2).GetComponent<Button>();
         restartButton.onClick.AddListener(OnClickRestartButton);
+        bestScoreText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+
         GameObject scoreObj = GameObject.FindWithTag("Score");
         score = scoreObj.GetComponent<Score>();
-        bestScoreText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        
         RunPlayerController player = FindObjectOfType<RunPlayerController>();
-
         player.PlayerDie += Open;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Start()
@@ -37,12 +41,12 @@ public class GameOverPanel : MonoBehaviour
 
     private void Open()
     {
-        LoadData();
+        gameManager.LoadData();
 
-        StartCoroutine(DelayPanel());
+        StartCoroutine(DelayOpenPanel());
     }
 
-    IEnumerator DelayPanel()
+    IEnumerator DelayOpenPanel()
     {
         yield return new WaitForSeconds(1f);
         canvasGroup.alpha = 1;
@@ -50,12 +54,12 @@ public class GameOverPanel : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
         if (score.isNew)
         {
-            bestScoreText.text = $"New Best Score : {bestScoe}";
-            Debug.Log(score.isNew);
+            bestScoreText.text = $"New Best Score : {gameManager.bestScore}";
+            Debug.Log($"GameoverPanel: {score.isNew}");
         }
         else
         {
-            bestScoreText.text = $"Best Score : {bestScoe}";
+            bestScoreText.text = $"Best Score : {gameManager.bestScore}";
         }
 
     }
@@ -65,23 +69,5 @@ public class GameOverPanel : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadData()
-    {
-        string path = $"{Application.dataPath}/Save/";
-        string fullPath = $"{path}data.json";
-
-        if (Directory.Exists(path) && File.Exists(fullPath))
-        {
-            string json = File.ReadAllText(fullPath);
-            SaveData saveData = JsonUtility.FromJson<SaveData>(json);
-            bestScoe = saveData.BestScore;
-        }
-        else
-        {
-            {
-                bestScoe = score.bestScore;
-            }
-        }
-
-    }
+   
 }

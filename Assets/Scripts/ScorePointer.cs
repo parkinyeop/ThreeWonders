@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ScorePointer : MonoBehaviour
 {
+    public int blockPoint = 10;
     GameObject scoreObj;
     Score score;
     //public Action<int> onScoreChange;
@@ -19,7 +20,7 @@ public class ScorePointer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            AddScore(10);
+            AddScore(blockPoint);
         }
     }
 
