@@ -29,7 +29,6 @@ public class RunPlayerController : MonoBehaviour
             isJump = true;
             runEffects.Stop();
         }
-        Debug.Log(isJump);
     }
 
    
