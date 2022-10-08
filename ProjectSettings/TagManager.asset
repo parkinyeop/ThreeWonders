@@ -8,6 +8,7 @@ TagManager:
   - Dog
   - Ground
   - Score
+  - Block
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,11 @@ public class BlockController : MonoBehaviour
     float xMin = -10f;
     public float accelator = 0.1f;
 
-
-    private void Awake()
+    private void Start()
     {
-
+        RunPlayerController player = FindObjectOfType<RunPlayerController>();
+        player.PlayerDie += Die;
+        
     }
     private void Update()
     {
@@ -30,5 +32,11 @@ public class BlockController : MonoBehaviour
         {
             Debug.Log("Player Hp Down");
         }
+    }
+    
+    public void Die()
+    {
+        moveSpeed = 0;
+        accelator = 0;
     }
 }

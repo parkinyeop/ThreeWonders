@@ -770,8 +770,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784492278}
-  - component: {fileID: 1784492277}
   - component: {fileID: 1784492279}
+  - component: {fileID: 1784492277}
   m_Layer: 0
   m_Name: BackGround
   m_TagString: Untagged

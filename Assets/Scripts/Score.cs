@@ -18,8 +18,7 @@ public class Score : MonoBehaviour
     private void Start()
     {
         scoreText = gameObject.GetComponent<TextMeshProUGUI>();
-        //GameObject scorePointer = FindObjectOfType<ScorePointer>().gameObject;
-        //scoreScript.onScoreChange += SetScore;
+        
     }
     void Update()
     {

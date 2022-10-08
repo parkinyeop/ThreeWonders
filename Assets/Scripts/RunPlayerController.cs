@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class RunPlayerController : MonoBehaviour
     float jumpForce = 8;
     bool isJump = false;
     public ParticleSystem runEffects;
+
+    public Action PlayerDie;
 
     void Start()
     {
@@ -29,17 +32,23 @@ public class RunPlayerController : MonoBehaviour
         Debug.Log(isJump);
     }
 
-    private void OnTriggerEnter(Collider other)
+   
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isJump = false;
             runEffects.Play();
         }
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            Die();
+        }
     }
 
-    void Die()
+    public void Die()
     {
-
+        PlayerDie?.Invoke();
+        runEffects.Stop();
     }
 }

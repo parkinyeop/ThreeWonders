@@ -7,10 +7,14 @@ public class BackGroundScroller : MonoBehaviour
     public float scrollSpeed = 0.5f;
     private Vector3 startPosition;
     float repeatWidth;
+    
     void Start()
     {
         startPosition = transform.position;
         repeatWidth = GetComponent<BoxCollider2D>().size.x * 0.5f;
+        RunPlayerController player = FindObjectOfType<RunPlayerController>();
+        player.PlayerDie += StopScroll;
+
     }
     void Update()
     {
@@ -19,5 +23,10 @@ public class BackGroundScroller : MonoBehaviour
         {
             transform.position = startPosition;
         }
+    }
+
+    private void StopScroll()
+    {
+        scrollSpeed = 0;
     }
 }

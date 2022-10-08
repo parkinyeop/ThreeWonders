@@ -18,6 +18,8 @@ public class BlockSpawnManager : MonoBehaviour
     {
        // spawnPos = new Vector3(spawnPosX, spawnPosY, 0);
         spawnTime = 15;
+        RunPlayerController player = FindObjectOfType<RunPlayerController>();
+        player.PlayerDie += StopSpawn;
     }
 
     // Update is called once per frame
@@ -40,5 +42,10 @@ public class BlockSpawnManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void StopSpawn()
+    {
+        spawnTime = 0;
     }
 }
