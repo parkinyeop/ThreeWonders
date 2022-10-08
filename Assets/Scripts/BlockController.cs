@@ -6,16 +6,18 @@ public class BlockController : MonoBehaviour
 {
     public float moveSpeed = 1f;
     float xMin = -10f;
+    public float accelator = 0.1f;
 
 
     private void Awake()
     {
-       
+
     }
     private void Update()
     {
         transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
-        
+        moveSpeed = moveSpeed + accelator * Time.deltaTime;
+
         if (transform.position.x < xMin)
         {
             Destroy(gameObject);

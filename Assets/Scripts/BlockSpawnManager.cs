@@ -7,15 +7,16 @@ public class BlockSpawnManager : MonoBehaviour
     //자식 오브젝트 배열을 랜덤하게 생성한다
     public GameObject[] blockPrefabs;
     public float spawnInterval = 5f;
-    float minSpawnInterval = 5f;
+    float minSpawnInterval = 3f;
     public float spawnTime = 1f;
     public float difficultyFactor = 0.5f;
-
-    //블록이 생성되는 위치
-    public Vector3 spawnPos = new Vector3(25, 1, 0);
+    float spawnPosX = 10f;
+    public Vector3 spawnPos;
+    
     // Start is called before the first frame update
     void Start()
     {
+       // spawnPos = new Vector3(spawnPosX, spawnPosY, 0);
         spawnTime = 15;
     }
 
@@ -30,7 +31,7 @@ public class BlockSpawnManager : MonoBehaviour
         {
             //랜덤하게 블록을 생성한다
             int blockIndex = Random.Range(0, blockPrefabs.Length);
-            Instantiate(blockPrefabs[blockIndex], spawnPos, blockPrefabs[blockIndex].transform.rotation);
+            Instantiate(blockPrefabs[blockIndex], new Vector3(spawnPosX, blockPrefabs[blockIndex].transform.position.y, 0), blockPrefabs[blockIndex].transform.rotation);
             spawnTime = 1;
             spawnInterval -= difficultyFactor * Time.deltaTime;
             if (spawnInterval < minSpawnInterval)

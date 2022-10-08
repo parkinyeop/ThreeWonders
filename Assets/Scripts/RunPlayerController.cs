@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class RunPlayerController : MonoBehaviour
 {
-    public float jumpPower = 10f;
     Rigidbody rb;
-    bool isGrounded = true;
+    public float speed = 1f;
+    float jumpForce = 8;
+    bool isJump = false;
+    public ParticleSystem runEffects;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        runEffects = GetComponent<ParticleSystem>();
     }
+
+    // Update is called once per frame
     void Update()
     {
-        //그라운드에 착지 해야 점프
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        
+        if (Input.GetKeyDown(KeyCode.Space) && !isJump)
         {
-            rb.velocity = Vector3.up * jumpPower;
-            isGrounded = false;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isJump = true;
+            runEffects.Stop();
+        }
+        Debug.Log(isJump);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isJump = false;
+            runEffects.Play();
         }
     }
-    private void OnCollisionEnter(Collision collision)
+
+    void Die()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+
     }
 }

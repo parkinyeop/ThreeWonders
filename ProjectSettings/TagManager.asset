@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - Dog
   - Ground
+  - Score
   layers:
   - Default
   - TransparentFX

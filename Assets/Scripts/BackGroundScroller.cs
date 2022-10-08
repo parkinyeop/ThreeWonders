@@ -5,15 +5,19 @@ using UnityEngine;
 public class BackGroundScroller : MonoBehaviour
 {
     public float scrollSpeed = 0.5f;
-    public float tileSizeZ = 10f;
     private Vector3 startPosition;
+    float repeatWidth;
     void Start()
     {
         startPosition = transform.position;
+        repeatWidth = GetComponent<BoxCollider2D>().size.x * 0.5f;
     }
     void Update()
     {
-        float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
-        transform.position = startPosition + Vector3.left * newPosition;
+        transform.Translate(Vector3.left * Time.deltaTime * scrollSpeed);
+        if (transform.position.x < startPosition.x - repeatWidth)
+        {
+            transform.position = startPosition;
+        }
     }
 }
