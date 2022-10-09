@@ -10,7 +10,8 @@ public class RunPlayerController : MonoBehaviour
     float jumpForce = 8;
     bool isJump = false;
     public ParticleSystem runEffects;
-    public ParticleSystem dieEffects;
+    
+    GameObject playerChecker;
 
     public Action PlayerDie;
 
@@ -18,7 +19,7 @@ public class RunPlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         runEffects = GetComponent<ParticleSystem>();
-        dieEffects.Stop();
+        playerChecker = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -40,8 +41,12 @@ public class RunPlayerController : MonoBehaviour
         {
             isJump = false;
             runEffects.Play();
-        }
-        if (collision.gameObject.CompareTag("Block"))
+        }       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Block"))
         {
             Die();
         }
@@ -51,6 +56,6 @@ public class RunPlayerController : MonoBehaviour
     {
         PlayerDie?.Invoke();
         runEffects.Stop();
-        dieEffects.Play();
+       
     }
 }

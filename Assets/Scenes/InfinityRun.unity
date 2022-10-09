@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bestScore: 0
+  currentScore: 0
   increaseInterval: 1
   isNew: 0
 --- !u!1 &1061425080
@@ -1247,7 +1248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784492276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1521,6 +1522,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953902301}
   m_CullTransparentMesh: 1
+--- !u!198 &2045637876 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7462795167380627984, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
+  m_PrefabInstance: {fileID: 4870173058110584247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2113871470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,22 +1631,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 358298377, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 358298377, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 358298378, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
-      propertyPath: m_Intensity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 358298378, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 1675993379, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
+      propertyPath: dieEffects
+      value: 
+      objectReference: {fileID: 2045637876}
     - target: {fileID: 4870173057477431993, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1689,9 +1683,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: RunPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7462795167380627997, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 7462795167380627984, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462795167380627984, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f86ee21b0368df543a8802b45c3f7265, type: 3}
