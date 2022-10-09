@@ -10,6 +10,7 @@ public class RunPlayerController : MonoBehaviour
     float jumpForce = 8;
     bool isJump = false;
     public ParticleSystem runEffects;
+    public ParticleSystem dieEffects;
 
     public Action PlayerDie;
 
@@ -17,12 +18,13 @@ public class RunPlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         runEffects = GetComponent<ParticleSystem>();
+        dieEffects.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && !isJump)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -31,7 +33,7 @@ public class RunPlayerController : MonoBehaviour
         }
     }
 
-   
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -49,5 +51,6 @@ public class RunPlayerController : MonoBehaviour
     {
         PlayerDie?.Invoke();
         runEffects.Stop();
+        dieEffects.Play();
     }
 }
