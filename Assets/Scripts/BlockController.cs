@@ -30,7 +30,8 @@ public class BlockController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("Player Hp Down");
+            Debug.Log("Player Hp Down");
+            
         }
     }
     

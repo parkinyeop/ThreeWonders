@@ -7,35 +7,38 @@ public class GameManager : MonoBehaviour
 {
     Score score;
     public int bestScore;
+    SaveData saveData = new SaveData();
 
     private void Awake()
     {
         score = FindObjectOfType<Score>();
+        LoadData();
+        score.bestScore = saveData.BestScore;
     }
 
     private void Start()
     {
         RunPlayerController player = FindObjectOfType<RunPlayerController>();
         player.PlayerDie += SaveData;
-        LoadData();
+
     }
     void SaveData()
     {
-        if (score.isNew == true)
+        //if (score.isNew == true)
+        //{
+        //}
+        SaveData saveData = new SaveData();
+        saveData.BestScore = score.bestScore;
+        string json = JsonUtility.ToJson(saveData);
+        string path = $"{Application.dataPath}/Save/";
+
+        if (!Directory.Exists(path))
         {
-            SaveData saveData = new SaveData();
-            saveData.BestScore = score.bestScore;
-            string json = JsonUtility.ToJson(saveData);
-            string path = $"{Application.dataPath}/Save/";
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            string fullpath = $"{path}data.json";
-            File.WriteAllText(fullpath, json);
+            Directory.CreateDirectory(path);
         }
+
+        string fullpath = $"{path}data.json";
+        File.WriteAllText(fullpath, json);
     }
     public void LoadData()
     {

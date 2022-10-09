@@ -9,14 +9,18 @@ public class Score : MonoBehaviour
 
     int targetScore = default;
     int increaseScore = 1;
-    public int bestScore = 0;
-    float currentScore = 0;
+    public int bestScore ;
+    public float currentScore = 0;
     public int increaseInterval = 5;
     public bool isNew = false;
     TextMeshProUGUI scoreText;
 
     //ScorePointer scoreScript;
-
+    private void Awake()
+    {
+        SaveData saveData = new SaveData();
+        bestScore = saveData.BestScore;
+    }
     private void Start()
     {
         scoreText = gameObject.GetComponent<TextMeshProUGUI>();
@@ -36,7 +40,7 @@ public class Score : MonoBehaviour
         {
             bestScore = Convert.ToInt32(currentScore);
             isNew = true;
-            Debug.Log($"Score: {isNew}");
+            //Debug.Log($"Score: {isNew}");
         }
         else
         {
